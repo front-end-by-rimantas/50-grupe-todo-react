@@ -21,13 +21,18 @@ form {
   flex-direction: column;
   width: 100%;
 }
-form > input,
-form > button {
-  min-height: 3rem;
+form > input {
+  padding: 0.3em 0.5em;
+  font-size: 1.2rem;
+}
+form > .btnList {
+  display: flex;
+}
+form button {
   width: 100%;
-  padding: 0.3rem 0.5rem;
-  font-size: 2rem;
-  line-height: 2rem;
+  padding: 0.3em 0.5em;
+  font-size: 1.3rem;
+  line-height: 1em;
 }
 
 /* ------------------------------- */
