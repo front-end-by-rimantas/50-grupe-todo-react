@@ -13,7 +13,7 @@ export function FormCreateTask(props) {
             return;
         }
 
-        addTaskCallback(task);
+        addTaskCallback(task, color);
     }
 
     return (

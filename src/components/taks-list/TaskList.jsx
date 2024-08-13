@@ -13,7 +13,7 @@ export function TaskList(params) {
 
     return (
         <div className="list">
-            {data.map((item, index) => <Task key={index} data={item} removeTask={removeTask} />)}
+            {data.map(item => <Task key={item.text} data={item} removeTask={removeTask} />)}
         </div>
     );
 }

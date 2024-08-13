@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export function Task(params) {
     const { removeTask, data } = params;
-    const { text } = data;
+    const { text, color } = data;
 
     const [taskVisibility, setTaskVisibility] = useState(true);
     const [taskDone, setTaskDone] = useState(false);
@@ -10,7 +10,7 @@ export function Task(params) {
     const [taskText, setTaskText] = useState(text);
     const [inputText, setInputText] = useState(text);
     const style = {
-        borderLeftColor: '#ff0000',
+        borderLeftColor: color ?? '#ccc',
     };
 
     function handleUpdate(e) {
@@ -23,6 +23,10 @@ export function Task(params) {
             setInputText(cleanText);
             setEditForm(prev => false);
         }
+    }
+
+    function handleDelete() {
+        removeTask(taskText);
     }
 
     if (taskVisibility === false) {
@@ -49,7 +53,7 @@ export function Task(params) {
                     <div className="divider"></div>
                     <button className="edit" onClick={() => setEditForm(prev => true)}>Edit</button>
                 </>}
-                <button onClick={() => removeTask(taskText)} className="delete">Delete</button>
+                <button onClick={handleDelete} className="delete">Delete</button>
             </div>
         </article>
     );

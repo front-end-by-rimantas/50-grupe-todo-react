@@ -7,17 +7,22 @@ import { tasks } from "./data/tasks.js";
 function App() {
   const [taskList, setTaskList] = useState(tasks);
 
-  function addTask(taskText) {
+  function addTask(taskText, taskColor) {
     setTaskList(prev => [
       ...prev,
       {
         text: taskText,
+        color: taskColor,
       },
     ]);
   }
 
   function removeTask(taskText) {
+    console.log('>>>', taskText);
+
     setTaskList(prev => prev.filter(task => task.text !== taskText));
+    console.log(taskList);
+
   }
 
   return (
