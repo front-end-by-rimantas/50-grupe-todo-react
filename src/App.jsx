@@ -5,9 +5,10 @@ import { TaskList } from "./components/taks-list/TaskList";
 // import { tasks } from "./data/tasks.js";
 
 function App() {
-  const storageKey = 'todo-data';
-  const [taskList, setTaskList] = useState([]);
-  const [id, setId] = useState(0);
+  const storageDataKey = 'todo-data';
+  const storageIdKey = 'todo-last-id';
+  const [taskList, setTaskList] = useState(readLocalData());
+  const [id, setId] = useState(readLocalId());
 
   // func, be antro parametro
   // pasileidzia kai ispiesiamas komponentas
@@ -28,8 +29,32 @@ function App() {
   // i ji ieina "useState" parametrai, kuriu reiksmems kintant
   // reikia paleisti sia funkcija
   useEffect(() => {
-    localStorage.setItem(storageKey, JSON.stringify(taskList));
+    localStorage.setItem(storageDataKey, JSON.stringify(taskList));
   }, [taskList]);
+
+  useEffect(() => {
+    localStorage.setItem(storageIdKey, JSON.stringify(id));
+  }, [id]);
+
+  function readLocalData() {
+    const localData = localStorage.getItem(storageDataKey);
+
+    if (localData) {
+      return JSON.parse(localData);
+    }
+
+    return [];
+  }
+
+  function readLocalId() {
+    const localData = localStorage.getItem(storageIdKey);
+
+    if (localData) {
+      return JSON.parse(localData);
+    }
+
+    return 0;
+  }
 
   function addTask(taskText, taskColor) {
     setTaskList(prev => [
@@ -68,6 +93,10 @@ function App() {
   function removeTask(id) {
     setTaskList(prev => prev.filter(task => task.id !== id));
   }
+
+  window.addEventListener('keyup', (e) => {
+    console.log(e.key);
+  });
 
   return (
     <main>
